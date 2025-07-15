@@ -8,7 +8,7 @@ function App() {
     <div>
       <Header />
       <MainContent />
-      <WelcomeMessage/>
+      <WelcomeMessage />
       <Footer />
     </div>
   );
