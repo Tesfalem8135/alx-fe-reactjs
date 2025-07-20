@@ -11,7 +11,10 @@ function App() {
         age={25} 
         bio="Loves hiking and photography" 
       />
-      
+      <Header />
+      <MainContent />
+      <Footer />
+
     </div>
   );
 }
