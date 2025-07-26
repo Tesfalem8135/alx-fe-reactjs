@@ -63,69 +63,54 @@ function Contact() {
               width: '100%',
               padding: '0.75rem',
               border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
 
-        <div>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
+import { useState } from 'react';
 
-        <div>
-          <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Message:</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows="5"
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '1rem',
-              resize: 'vertical'
-            }}
-          />
-        </div>
+function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-        <button
-          type="submit"
-          style={{
-            backgroundColor: '#333',
-            color: 'white',
-            padding: '0.75rem 1.5rem',
-            border: 'none',
-            borderRadius: '4px',
-            fontSize: '1rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s',
-            marginTop: '1rem'
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#555'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#333'}
-        >
-          Submit
-        </button>
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <button type="submit">Send Message</button>
       </form>
     </div>
   );
