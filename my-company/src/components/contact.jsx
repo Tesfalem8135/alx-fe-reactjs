@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Contact from './components/Contact';
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
