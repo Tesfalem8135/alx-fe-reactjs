@@ -1,3 +1,4 @@
+import React from 'react';
 import ProfilePage from './components/ProfilePage';
 import UserContext from './components/UserContext';
 
