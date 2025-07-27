@@ -14,7 +14,6 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Form submitted!');
-    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
