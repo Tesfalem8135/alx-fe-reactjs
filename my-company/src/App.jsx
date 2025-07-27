@@ -1,33 +1,25 @@
 
-
-
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
-
-function RecipeSharing() {
-  return (
-    <div>
-      <h1>Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
-  );
-}
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Services from './components/Services';
+import Contact from './components/Contact';
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Navbar />
+    <BrowserRouter>
+      <Navbar />
+      <div style={{ minHeight: '80vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/recipes" element={<RecipeSharing />} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
