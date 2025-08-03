@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
@@ -27,39 +26,60 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch}>
+    <div className="search-container">
+      <h1>GitHub User Search</h1>
+      <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Search GitHub users"
+          placeholder="Enter GitHub username"
+          className="search-input"
         />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Searching...' : 'Search'}
+        <button 
+          type="submit" 
+          className="search-button"
+          disabled={loading}
+        >
+          Search
         </button>
       </form>
 
-      {loading && <p>Loading...</p>}
-      
-      {error && <p>{error}</p>}
+      {/* Loading State */}
+      {loading && <div className="loading-message">Loading...</div>}
 
+      {/* Error State */}
+      {error && (
+        <div className="error-message">
+          Looks like we can't find the user
+        </div>
+      )}
+
+      {/* Success State */}
       {userData && (
-        <div className="user-result">
+        <div className="user-profile">
           <img 
             src={userData.avatar_url} 
             alt={`${userData.login}'s avatar`} 
-            width="100"
+            className="user-avatar"
           />
-          <h2>{userData.name || userData.login}</h2>
-          <p>{userData.bio}</p>
-          <a 
-            href={userData.html_url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            View Profile
-          </a>
+          <div className="user-info">
+            <h2 className="user-name">{userData.name || userData.login}</h2>
+            {userData.bio && <p className="user-bio">{userData.bio}</p>}
+            <div className="user-stats">
+              <span>Followers: {userData.followers}</span>
+              <span>Following: {userData.following}</span>
+              <span>Repositories: {userData.public_repos}</span>
+            </div>
+            <a 
+              href={userData.html_url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="profile-link"
+            >
+              View Profile on GitHub
+            </a>
+          </div>
         </div>
       )}
     </div>
