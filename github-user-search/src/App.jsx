@@ -1,14 +1,10 @@
-// src/App.jsx
-import UserSearch from './components/UserSearch/UserSearch';
-import './App.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css' // Make sure this line exists
 
-function App() {
-  return (
-    <div className="app">
-      <h1>GitHub User Search</h1>
-      <UserSearch />
-    </div>
-  );
-}
-
-export default App;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
