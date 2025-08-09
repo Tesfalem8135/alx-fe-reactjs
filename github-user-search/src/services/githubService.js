@@ -79,3 +79,32 @@ export const advancedSearchUsers = async (params) => {
     );
   }
 };
+
+/**
+ * Fetches detailed data for a specific GitHub user
+ * @param {string} username - GitHub username to fetch data for
+ * @returns {Promise<Object>} Detailed user data
+ */
+export const fetchUserData = async (username) => {
+  try {
+    const response = await axios.get(`${API_URL}/users/${username}`, {
+      headers: {
+        Authorization: import.meta.env.VITE_APP_GITHUB_TOKEN 
+          ? `token ${import.meta.env.VITE_APP_GITHUB_TOKEN}`
+          : undefined,
+        Accept: 'application/vnd.github.v3+json'
+      }
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching data for user ${username}:`, error);
+    throw new Error(
+      error.response?.data?.message || 
+      error.message || 
+      'Failed to fetch GitHub user data'
+    );
+  }
+};
+
+// ... rest of the existing advancedSearchUsers function ...
