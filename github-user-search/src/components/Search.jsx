@@ -17,9 +17,11 @@ const Search = () => {
   const [totalResults, setTotalResults] = useState(0);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSearchParams(prev => ({ ...prev, [name]: value }));
-  };
+  setSearchParams(prev => ({
+    ...prev,
+    [e.target.name]: e.target.value  // Using ["target.value"]
+  }));
+};
 
   const handleSearch = async (e) => {
     e.preventDefault();
