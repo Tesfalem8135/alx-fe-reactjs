@@ -1,72 +1,74 @@
 import { useState } from "react";
-import { fetchUserData } from "../services/githubService"; // ✅ Explicitly importing
 
-export default function Search() {
+export default function Search({ onSearch }) {
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!username.trim()) return;
-
-    setLoading(true);
-    setError("");
-    setUserData(null);
-
-    try {
-      // ✅ Explicit usage of fetchUserData inside Search.jsx
-      const data = await fetchUserData(username);
-      setUserData(data);
-    } catch (err) {
-      setError("Looks like we cant find the user");
-    } finally {
-      setLoading(false);
-    }
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      {/* Search Form */}
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 mb-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col md:flex-row gap-3 bg-white p-4 rounded-xl shadow-lg"
+    >
+      {/* Username Input */}
+      <div className="flex flex-col flex-1">
+        <label htmlFor="username" className="text-sm font-medium text-gray-700">
+          Username
+        </label>
         <input
+          id="username"
           type="text"
-          placeholder="Enter GitHub username"
+          placeholder="Enter username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="flex-1 border border-gray-300 rounded p-2"
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+      </div>
+
+      {/* Location Input */}
+      <div className="flex flex-col flex-1">
+        <label htmlFor="location" className="text-sm font-medium text-gray-700">
+          Location
+        </label>
+        <input
+          id="location"
+          type="text"
+          placeholder="Enter location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Min Repos Input */}
+      <div className="flex flex-col w-32">
+        <label htmlFor="minRepos" className="text-sm font-medium text-gray-700">
+          Min Repos
+        </label>
+        <input
+          id="minRepos"
+          type="number"
+          placeholder="0"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex items-end">
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors w-full md:w-auto"
         >
           Search
         </button>
-      </form>
-
-      {/* Conditional Rendering */}
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {userData && (
-        <div className="bg-white shadow p-4 rounded text-center">
-          <img
-            src={userData.avatar_url}
-            alt={userData.login}
-            className="w-24 h-24 mx-auto rounded-full"
-          />
-          <h2 className="mt-2 font-bold text-lg">{userData.name || userData.login}</h2>
-          <a
-            href={userData.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 underline"
-          >
-            View Profile
-          </a>
-        </div>
-      )}
-    </div>
+      </div>
+    </form>
   );
-export default Search;
+}
