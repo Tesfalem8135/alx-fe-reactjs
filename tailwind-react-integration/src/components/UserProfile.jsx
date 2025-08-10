@@ -13,26 +13,26 @@ function UserProfile() {
       </p>
     </div>
   );
- function UserProfile({ name, email, imageUrl }) {
+export default function UserProfile() {
   return (
-    <div className="max-w-xs sm:max-w-sm mx-auto bg-white rounded-xl shadow-md overflow-hidden p-4 sm:p-6 md:p-8">
-      <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <img 
-          className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full object-cover"
-          src={imageUrl}
-          alt={`Profile of ${name}`}
-        />
-        <div className="text-center sm:text-left">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">
-            {name}
-          </h2>
-          <p className="text-sm sm:text-base text-gray-500">
-            {email}
-          </p>
-        </div>
+    <div className="mx-auto p-4 sm:p-4 md:p-8 max-w-xs md:max-w-sm bg-white rounded-xl shadow-md flex flex-col items-center space-y-4">
+      {/* Profile Image */}
+      <img
+        src="/profile.jpg"
+        alt="User Profile"
+        className="rounded-full w-24 h-24 md:w-36 md:h-36 object-cover"
+      />
+
+      {/* User Info */}
+      <div className="text-center">
+        <h2 className="font-bold text-lg md:text-xl">John Doe</h2>
+        <p className="text-gray-600 text-sm md:text-base">
+          Software Developer at Example Inc. Passionate about building great user experiences and writing clean code.
+        </p>
       </div>
     </div>
   );
+}
 }
 
 export default UserProfile;
