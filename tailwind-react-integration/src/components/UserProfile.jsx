@@ -30,6 +30,5 @@ function UserProfile() {
     </div>
   );
 }
-}
 
 export default UserProfile;
