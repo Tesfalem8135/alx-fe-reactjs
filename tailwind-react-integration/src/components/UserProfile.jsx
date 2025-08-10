@@ -32,6 +32,29 @@ export default function UserProfile() {
       </div>
     </div>
   );
+  export default function UserProfile() {
+  return (
+    <div className="mx-auto sm:p-4 md:p-8 sm:max-w-xs md:max-w-sm bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col items-center space-y-4">
+      {/* Profile Image */}
+      <img
+        src="/profile.jpg"
+        alt="User Profile"
+        className="rounded-full sm:w-24 sm:h-24 md:w-36 md:h-36 object-cover hover:scale-110 transition-transform duration-300 ease-in-out"
+      />
+
+      {/* User Info */}
+      <div className="text-center">
+        <h2 className="font-bold sm:text-lg md:text-xl hover:text-blue-500 transition-colors duration-300 ease-in-out">
+          John Doe
+        </h2>
+        <p className="text-gray-600 sm:text-sm md:text-base">
+          Software Developer at Example Inc. Passionate about building great user experiences and writing clean code.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 }
 }
 
